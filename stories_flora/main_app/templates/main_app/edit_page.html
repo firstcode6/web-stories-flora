@@ -1,0 +1,30 @@
+{% extends 'main_app/layout.html' %}
+
+{% block title %} Edit page {% endblock %}
+
+{% block content %}
+<div class="features">
+    <h1>Edit page</h1>
+    <form method="post">
+        {% csrf_token %}
+
+         <div class="div-form">
+             <label for="">Story_i18n id:</label>
+            {{ form_page.story_i18n }}
+            <label for="category">Image:</label>
+            {{ form_page.image }}
+            <label for="">Icon: </label>
+            {{ form_page.icon }}
+            <label for="">Headline:</label>
+            {{ form_page.headline }}
+            <label for="">Text:</label>
+            {{ form_page.text }}
+            <label for="">Deleted:</label>
+            {{ form_page.deleted }}
+        </div>
+
+        <span>{{ error_add1 }}</span>
+        <button class="button button_green" type="submit"><i class="fas fa-plus-circle"></i> Save</button>
+    </form>
+</div>
+{% endblock %}

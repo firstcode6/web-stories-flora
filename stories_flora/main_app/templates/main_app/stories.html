@@ -1,0 +1,65 @@
+{% extends 'main_app/layout.html' %}
+
+{% block title %} Stories {% endblock %}
+
+{% block content %}
+<div class="features">
+    <h1>Stories ({{ stories_key.count }})</h1>
+
+
+
+        {% comment %}
+        <h3>Language</h3>
+        {% for lang in view.get_languages %}
+        <div>
+            <input type="checkbox" class="checked" name="lang_val" value="{{ lang.id }}">
+            <span class="span editContent">{{ lang.language }}</span>
+        </div>
+        {% endfor %}
+        {% endcomment %}
+    <form action="{% url 'filter' %}" method="get">
+        <h3>Category</h3>
+        {% for categ in view.get_categories %}
+        <div>
+            <input type="checkbox" class="checked" name="categ_val" value="{{ categ.category.pk }}">
+            <span class="span editContent">{{ categ.name }}</span>
+        </div>
+        {% endfor %}
+        <h3>Hidden</h3>
+        <div>
+            <input type="checkbox" class="checked" name="hidden_val" value="{{ view.hidden123 }}">
+            <span class="span editContent"> Hide in stories ({{ view.hidden123 }}) </span>
+        </div>
+        <button class="button button_grey" type="submit">Filter</button>
+    </form>
+
+    <div class="grid">
+        {% if stories_key %}
+        {% for el in stories_key %}
+        <div class="polaroid">
+            <div class="container">
+
+                <div class="top-right">Id: {{ el.pk }} {{ el.category }}</div>
+
+                <div class="box-title"><h3> </h3></div>
+                <div class="box-title"><p>Hide in stories: {{ el.hide_in_stories }}</p></div>
+                <div class="box-subtitle"><p>Post priority: {{ el.post_priority }}</p></div>
+                <div class="box-subtitle"><p>{{ el.fresh_after }} - {{ el.fresh_before }}</p></div>
+                <div class="box-subtitle"><p>Clients eligible: {{ el.clients_eligible }}</p></div>
+
+                <div class="box-button"><a href="{% url 'story_details' el.pk %}" class="button button_read">
+                    Details
+                    <svg class="bi" width="20" height="20" fill="currentColor">
+                        <use xlink:href="static/main_app/icons/bootstrap-icons.svg#arrow-right-circle"/>
+                    </svg>
+                </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>There is no story</p>
+    {% endif %}
+</div>
+{% endblock %}

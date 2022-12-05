@@ -1,0 +1,28 @@
+{% extends 'main_app/layout.html' %}
+
+{% block title %} Create language of story {% endblock %}
+
+{% block content %}
+<div class="features">
+    <h1>Create story i18n</h1>
+    <form action="{% url 'add_story_i18n' pk_st=1 %}" method="post">
+        {% csrf_token %}
+        <div class="div-form">
+             <label for="">Story id:</label>
+            {{ form_story_i18n.story }}
+            <label for="language">Language id:</label>
+            {{ form_story_i18n.language }}
+            <label for="">Title: </label>
+            {{ form_story_i18n.title }}
+            <label for="">Subtitle:</label>
+            {{ form_story_i18n.subtitle }}
+            <label for="">Title icon:</label>
+            {{ form_story_i18n.title_icon }}
+            <label for="">Title image:</label>
+            {{ form_story_i18n.title_image }}
+        </div>
+
+        <button class="button button_green" type="submit"><i class="fas fa-plus-circle"></i> Add</button>
+    </form>
+</div>
+{% endblock %}

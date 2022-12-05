@@ -1,0 +1,38 @@
+{% extends 'main_app/layout.html' %}
+
+{% block title %} Categories {% endblock %}
+
+{% block content %}
+<div class="features">
+    <h1>Categories ({{ category.count }}):</h1>
+    <p>Time now: {% now "Y-m-d H:i:s" %}</p>
+    <p>Size of categories: {{ '12342343'|filesizeformat }}</p>
+    <div class="grid">
+        {% if category %}
+        {% for categ in category %}
+        <div class="polaroid">
+            <div class="container">
+
+
+                <div class="box-title"><h3>Id: {{ categ.pk }} Name: {{ categ.name }}</h3></div>
+                <div class="box-subtitle"><p>Category priority: {{ categ.category_priority }}</p></div>
+                <div class="box-subtitle"><p>{{ view.my_func }}</p></div>
+
+                <div class="box-button"><a href="{% url 'category_details' categ.pk %}" class="button button_read">
+                    Details
+                    <svg class="bi" width="20" height="20" fill="currentColor">
+                        <use xlink:href="static/main_app/icons/bootstrap-icons.svg#arrow-right-circle"/>
+                    </svg>
+                </a>
+                </div>
+
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>There is no category</p>
+    {% endif %}
+</div>
+{% endblock %}

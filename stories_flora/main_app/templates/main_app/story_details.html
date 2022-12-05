@@ -1,0 +1,47 @@
+{% extends 'main_app/layout.html' %}
+
+{% block title %} {{ key_story.title }} {% endblock %}
+
+{% block content %}
+<div class="features">
+
+    <h3>Id story: {{ key_story.pk }}</h3>
+    <p>Hide in stories: {{ key_story.hide_in_stories }}</p>
+    <p>Category id: {{ key_story.category_id }}</p>
+    <p>Category_priority: {{ key_story.category.category_priority }}</p>
+    <p>Post priority: {{ key_story.post_priority }}</p>
+    <p>Fresh after: {{ key_story.fresh_after }}</p>
+    <p>Fresh before: {{ key_story.fresh_before }}</p>
+    <p>Clients eligible: {{ key_story.clients_eligible }}</p>
+    <br>
+    <a href="{% url 'edit_story' key_story.pk %}" class="button button_grey">Edit</a>
+    <p></p>
+
+
+    <h3>Stories i18n ({{ stories_i18n.count }}):</h3>
+     <a href="{% url 'add_story_i18n' pk_st=key_story.pk %}"><button class="button"><i class="fas fa-plus-circle"></i> Add language of story</button></a>
+    {% for st in stories_i18n %}
+    <div class="polaroid">
+        <div class="container">
+            <div class="box"><img src={{ st.title_image }} alt="Title image"></div>
+            <div class="top-right">{{ st.pk }} {{ st.category }} ({{ st.language }})</div>
+            <div class="box-title"><h3>{{ st.title }}</h3></div>
+            <div class="box-subtitle"><p>{{ st.subtitle }}</p></div>
+
+            <div class="box-button"><a href="{% url 'story_i18n_details' pk_st=key_story.pk pk=st.pk %}" class="button button_read">
+                Details
+                <svg class="bi" width="20" height="20" fill="currentColor">
+                    <use xlink:href="static/main_app/icons/bootstrap-icons.svg#arrow-right-circle"/>
+                </svg>
+            </a>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+    <br>
+
+
+
+</div>
+{% endblock %}

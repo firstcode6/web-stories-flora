@@ -1,0 +1,46 @@
+{% extends 'main_app/layout.html' %}
+
+{% block title %} {{ page_story.title }} {% endblock %}
+
+{% block content %}
+<div class="features">
+    <h3> Id story: {{ page_story.story }} Category: {{ page_story.story.category }} Category priority:
+       {{ page_story.story.category.category_priority }}</h3>
+
+    <p>Post priority: {{ page_story.story.post_priority }}</p>
+    <p>Hide in stories: {{ page_story.story.hide_in_stories }}</p>
+    <p>Fresh after: {{ page_story.story.fresh_after}}</p>
+    <p>Time Since Fresh after: {{ page_story.story.fresh_after|timesince }}</p>
+    <p>Fresh before: {{ page_story.story.fresh_before }}</p>
+    <p>Clients eligible: {{ page_story.story.clients_eligible }}</p>
+    <br>
+
+    <p>Id Stories i18n: {{ page_story.story }}</p>
+    <p>Language: {{ page_story.language }}</p>
+    <p>Title: {{ page_story.title }}</p>
+    <p>Subtitle: {{ page_story.subtitle }}</p>
+
+    <p>Title icon: <img src={{ page_story.title_icon }} alt="Icon image" style="width:15%"></p>
+    <p>Title image: <img src={{ page_story.title_image }} alt="Title image" style="width:15%"></p>
+    <a href="{% url 'edit_story_i18n' pk_st=page_story.story pk=page_story.pk %}" class="button button_grey">Edit</a>
+
+    <h3>Pages ({{ pages.count }}):</h3>
+     <a href="{% url 'add_page' pk_st=page_story.story.pk pk_i18n=page_story.pk %}">
+        <button class="button"><i class="fas fa-plus-circle"></i> Add page</button>
+    </a>
+
+    {% for p in pages %}
+    <div class="div-pages">
+        <div class="box"><img src={{ p.image }} alt="Icon image"></div>
+        <div class="div-text">
+            <h3>Headline: {{ p.headline }}</h3>
+            <p>Text: {{ p.text }}</p>
+            <p>Deleted: {{ p.deleted }}</p>
+            <a href="{% url 'edit_page' pk_st=page_story.story.pk pk_i18n=page_story.pk pk=p.pk %}" class="button button_grey">Edit</a>
+        </div>
+    </div>
+    {% endfor %}
+
+
+</div>
+{% endblock %}

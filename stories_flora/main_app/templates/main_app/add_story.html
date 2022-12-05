@@ -1,0 +1,28 @@
+{% extends 'main_app/layout.html' %}
+
+{% block title %} Create story {% endblock %}
+
+{% block content %}
+<div class="features">
+    <h1>Create story</h1>
+    <form action="{% url 'add_story' %}" method="post">
+        {% csrf_token %}
+        <div class="div-form">
+            <label for="category">Category id:</label>
+            {{ form_story.category }}
+            <label for="">Hide in stories: </label>
+            {{ form_story.hide_in_stories }}
+            <label for="">Post priority:</label>
+            {{ form_story.post_priority }}
+            <label for="">Fresh after:</label>
+            {{ form_story.fresh_after }}
+            <label for="">Fresh before:</label>
+            {{ form_story.fresh_before }}
+            <label for="">Clients eligible:</label>
+            {{ form_story.clients_eligible }}
+        </div>
+        <span>{{ error_add1 }}</span>
+        <button class="button button_green" type="submit"><i class="fas fa-plus-circle"></i> Add</button>
+    </form>
+</div>
+{% endblock %}
