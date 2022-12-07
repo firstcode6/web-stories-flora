@@ -24,7 +24,8 @@ SECRET_KEY = 'django-insecure-ahnitwwj9_x4v4@z))8abi%frwg4^+xjw(e=vf7xit2g_99ocy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+
 
 # Application definition
 
@@ -47,6 +48,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# X_FRAME_OPTIONS = "allow-from https://educative.io"
 
 ROOT_URLCONF = 'stories_flora.urls'
 
@@ -77,7 +80,7 @@ DATABASES = {
         'NAME': 'stories3',
         'USER': 'user1',
         'PASSWORD': 'firststep',
-        'HOST': 'localhost',
+        'HOST': 'postgres_container',  # 'localhost',
         'POST': '5432'
     }
 }

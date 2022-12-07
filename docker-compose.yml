@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  flora_container:
+    restart: always
+    depends_on:
+      - postgres
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+
+  postgres:
+    restart: always
+    image: postgres
+    container_name: postgres_container
+    environment:
+      - POSTGRES_DB=stories3
+      - POSTGRES_USER=user1
+      - POSTGRES_PASSWORD=firststep
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
